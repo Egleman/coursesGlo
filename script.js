@@ -1,9 +1,9 @@
-let title = 'Первый проект';
-let screens = "Простые, Сложные, Интерактивные";
-let screenPrice = 53;
+let title = prompt("Как называется ваш проект?");
+let screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
+let screenPrice = +prompt('Сколько будет стоить данная работа?');
 let rollback = 7;
 let fullPrice = 100;
-let adaptive = true;
+let adaptive = confirm('Нужен ли адаптив на сайте?');
 
 console.log(typeof(title));
 console.log(typeof(fullPrice));
@@ -12,12 +12,6 @@ console.log(screens.length);
 console.log("Стоимость вёрстки экранов " + screenPrice +  " рубля");
 console.log(screens.toLowerCase().split(', '));
 console.log(fullPrice * (rollback/100));
-
-
-title = prompt("Как называется ваш проект?");
-screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
-screenPrice = +prompt('Сколько будет стоить данная работа?');
-adaptive = confirm('Нужен ли адаптив на сайте?');
 
 
 let service1 = prompt('Какой дополнительный тип услуги нужен?');
