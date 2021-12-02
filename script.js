@@ -22,27 +22,6 @@ const asking = () => {
     adaptive = confirm('Нужен ли адаптив на сайте?');
 };
 
-//Я случайно сделал сразу усложнённое задание на проверку, чтобы 
-//число сохранялось, как число не зависимо от пробелов и кнопки отмены
-/*
-функция проверки
-
-let testNum = '             25';
-function test (y) {
-    let sum = 0;
-    sum = (()=> {
-        let n;
-            do {
-                n = y;
-            } while (!isNumber(n));
-            return +n;
-    })();
-    return sum;
-}
-console.log(test(testNum), typeof(test(testNum)));
-*/
-
-
 const getAllServicePrices = () => {
     let sum = 0;
 
@@ -53,14 +32,6 @@ const getAllServicePrices = () => {
             service2 = prompt('Какой дополнительный тип услуги нужен?', "Таймер");
         }
         sum += getUserAnswer('Сколько это будет стоить?', '1000', 'number');
-        /*(() => {
-            let n;
-            do {
-                n = prompt('Сколько это будет стоить?');
-            } while (!isNumber(n));
-            return +n;
-        })(); */
-        
     }
     
     return sum;
