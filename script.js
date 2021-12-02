@@ -52,17 +52,28 @@ const getAllServicePrices = () => {
         } else if (i === 1) {
             service2 = prompt('Какой дополнительный тип услуги нужен?', "Таймер");
         }
-        sum += (() => {
+        sum += getUserAnswer('Сколько это будет стоить?', '1000', 'number');
+        /*(() => {
             let n;
             do {
                 n = prompt('Сколько это будет стоить?');
             } while (!isNumber(n));
             return +n;
-        })();
+        })(); */
+        
     }
+    
     return sum;
 };
 
+
+function getUserAnswer(message, numb, type) {
+    let n;
+    do {
+        n = prompt(message, numb, type);
+    } while(!isNumber(n));
+    return +n;
+}
 
 function getFullPrice(srcPri, allSrcPri) {
     return srcPri + allSrcPri;
