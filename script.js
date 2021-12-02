@@ -12,12 +12,25 @@ let servicePercentPrice;
 const isNumber = (x) => {
     return !isNaN(parseFloat(x)) && isFinite(x);
 };
+function isString(str) {
+    return str ? !!str.trim() : false;
+}
+
+function getUserAnswer(message, numb, check) {
+    let n;
+    do {
+        n = prompt(message, numb);
+    } while(!check(n));
+    return n;
+}
+
+
 
 const asking = () => {
-    title = prompt("Введите название проекта", "калькулятор");
-    screens = prompt('Какие типы экранов нужно разработать?', "сложные");
+    title = getUserAnswer("Введите название проекта", "калькулятор", isString);
+    screens = getUserAnswer('Какие типы экранов нужно разработать?', "сложные", isString);
     do {
-        screenPrice = +prompt('Сколько будет стоить данная работа?', "15000");
+        screenPrice = +getUserAnswer('Сколько будет стоить данная работа?', "15000", isNumber);
     } while (isNaN(screenPrice));
     adaptive = confirm('Нужен ли адаптив на сайте?');
 };
@@ -27,24 +40,18 @@ const getAllServicePrices = () => {
 
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
-            service1 = prompt('Какой дополнительный тип услуги нужен?', "Метрика");
+            service1 = getUserAnswer('Какой дополнительный тип услуги нужен?', "Метрика", isString);
         } else if (i === 1) {
-            service2 = prompt('Какой дополнительный тип услуги нужен?', "Таймер");
+            service2 = getUserAnswer('Какой дополнительный тип услуги нужен?', "Таймер", isString);
         }
-        sum += getUserAnswer('Сколько это будет стоить?', '1000', 'number');
+        sum += +getUserAnswer('Сколько это будет стоить?', '1000', isNumber);
     }
     
     return sum;
 };
 
 
-function getUserAnswer(message, numb, type) {
-    let n;
-    do {
-        n = prompt(message, numb, type);
-    } while(!isNumber(n));
-    return +n;
-}
+
 
 function getFullPrice(srcPri, allSrcPri) {
     return srcPri + allSrcPri;
