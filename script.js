@@ -10,13 +10,6 @@ const appData = {
     servicePercentPrice: 0,
     asking: () => {
         appData.title = appData.getUserAnswer("Введите название проекта", "калькулятор", appData.isString);
-        /*
-        appData.screens = appData.getUserAnswer('Какие типы экранов нужно разработать?', "сложные", appData.isString);
-        do {
-            appData.screenPrice = +appData.getUserAnswer('Сколько будет стоить данная работа?', "15000", appData.isNumber);
-        } while (isNaN(appData.screenPrice));
-        appData.adaptive = confirm('Нужен ли адаптив на сайте?');
-        */
 
         for (let i = 0; i < 2; i++) {
             let name = appData.getUserAnswer('Какие типы экранов нужно разработать?', "сложные", appData.isString);
@@ -53,11 +46,6 @@ const appData = {
             return a + b.price;
         }, initialValue); 
 
-        /*
-        for (let screen of appData.screens) {
-            appData.screenPrice += screen.price;
-        }
-        */
         for (let key in appData.services) {
             appData.allServicePrices += appData.services[key];
         }
@@ -96,11 +84,11 @@ const appData = {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
         console.log(appData.screens);
-        /*
+        
         for(let i in appData){
             console.log('appData[' + i + '] = ' + appData[i]);
         }
-        */
+        
     
     }
 };
