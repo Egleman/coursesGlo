@@ -9,24 +9,25 @@ const appData = {
     allServicePrices: 0,
     servicePercentPrice: 0,
     asking: () => {
-        appData.title = appData.getUserAnswer("Введите название проекта", "калькулятор", appData.isString);
+        appData.title = getUserAnswer("Введите название проекта", "калькулятор", isString);
 
         for (let i = 0; i < 2; i++) {
-            let name = appData.getUserAnswer('Какие типы экранов нужно разработать?', "сложные", appData.isString);
+            let name = getUserAnswer('Какие типы экранов нужно разработать?', "сложные", isString);
             let price = 0;
             do {
-                price = +appData.getUserAnswer('Сколько будет стоить данная работа?', "15000", appData.isNumber);
+                price = +getUserAnswer('Сколько будет стоить данная работа?', '15000', isNumber);
             } while (isNaN(price));
             appData.screens.push({id: i, name: name, price: price});
         }
 
         for (let i = 0; i < 2; i++) {
             let price = 0;
-            let name = appData.getUserAnswer('Какой дополнительный тип услуги нужен?', "Метрика", appData.isString);
-            price = +appData.getUserAnswer('Сколько это будет стоить?', '1000', appData.isNumber); 
+            let name = getUserAnswer('Какой дополнительный тип услуги нужен?', "Метрика", isString);
+            price = +getUserAnswer('Сколько это будет стоить?', '1000', isNumber); 
             appData.services[name + i] = price;
         }
     },
+    /*
     isNumber: (x) => {
         return !isNaN(parseFloat(x)) && isFinite(x);
     },
@@ -40,6 +41,7 @@ const appData = {
     } while(!check(n));
     return n;
     },
+    */
     addPrices: () => {
         let initialValue = 0;
         appData.screenPrice = appData.screens.reduce((a, b) => {
@@ -92,7 +94,22 @@ const appData = {
     
     }
 };
+//Функции хелперы
+function isNumber(x) {
+    return !isNaN(parseFloat(x)) && isFinite(x);
+}
 
+function isString(str) {
+    return isNaN(str) ? !!str.trim() : false;
+}
+function getUserAnswer(message, numb, check) {
+    let n;
+do {
+    n = prompt(message, numb);
+} while(!check(n));
+return n;
+}
+//Конец функций хелперов
 appData.start();
 
 
