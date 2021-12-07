@@ -27,21 +27,6 @@ const appData = {
             appData.services[name + i] = price;
         }
     },
-    /*
-    isNumber: (x) => {
-        return !isNaN(parseFloat(x)) && isFinite(x);
-    },
-    isString: (str) => {
-        return isNaN(str) ? !!str.trim() : false;
-    },
-    getUserAnswer: (message, numb, check) => {
-        let n;
-    do {
-        n = prompt(message, numb);
-    } while(!check(n));
-    return n;
-    },
-    */
     addPrices: () => {
         let initialValue = 0;
         appData.screenPrice = appData.screens.reduce((a, b) => {
