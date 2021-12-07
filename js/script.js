@@ -1,3 +1,37 @@
+const title = document.getElementsByTagName('h1')[0];
+const startReset = document.getElementsByClassName('handler_btn');
+const screenBtn = document.querySelector('.screen-btn');
+const controls = document.querySelectorAll('.other-items.percent');
+const mainControls = document.querySelectorAll('.other-items.number');
+const inputVal = document.querySelector('.rollback > .main-controls__range > input');
+const spanVal = document.querySelector('.rollback > .main-controls__range > .range-value');
+let totalInput = document.getElementsByClassName('total-input');
+let display = document.querySelectorAll('.screen');
+
+
+function getElement(x) {
+    for (let i = 0; i < x.length; i++) {
+        console.log(x[i]);
+    }
+}
+
+function getElement2(x) {
+    x.forEach(y => {
+        console.log(y);
+    });
+}
+
+console.log(title);
+console.log(getElement(startReset));
+console.log(screenBtn);
+console.log(getElement2(controls));
+console.log(getElement2(mainControls));
+console.log(inputVal);
+console.log(spanVal);
+console.log(getElement(totalInput));
+console.log(display);
+
+
 const appData = {
     title: '',
     screens: [],
@@ -95,7 +129,9 @@ do {
 return n;
 }
 //Конец функций хелперов
-appData.start();
+
+
+//appData.start();
 
 
 
