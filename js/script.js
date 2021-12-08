@@ -1,34 +1,49 @@
 const title = document.getElementsByTagName('h1')[0];
-const startReset = document.getElementsByClassName('handler_btn');
+const start = document.getElementsByClassName('handler_btn')[0];
+const reset = document.getElementsByClassName('handler_btn')[1];
 const screenBtn = document.querySelector('.screen-btn');
 const controls = document.querySelectorAll('.other-items.percent');
 const mainControls = document.querySelectorAll('.other-items.number');
 const inputVal = document.querySelector('.rollback > .main-controls__range > input');
 const spanVal = document.querySelector('.rollback > .main-controls__range > .range-value');
-let totalInput = document.getElementsByClassName('total-input');
+let totalInput1 = document.getElementsByClassName('total-input')[0];
+let totalInput2 = document.getElementsByClassName('total-input')[1];
+let totalInput3 = document.getElementsByClassName('total-input')[2];
+let totalInput4 = document.getElementsByClassName('total-input')[3];
+let totalInput5 = document.getElementsByClassName('total-input')[4];
 let display = document.querySelectorAll('.screen');
 
-
-function getElement(x) {
-    for (let i = 0; i < x.length; i++) {
-        console.log(x[i]);
-    }
+//Функции хелперы
+function isNumber(x) {
+    return !isNaN(parseFloat(x)) && isFinite(x);
 }
 
-function getElement2(x) {
-    x.forEach(y => {
-        console.log(y);
-    });
+function isString(str) {
+    return isNaN(str) ? !!str.trim() : false;
 }
+function getUserAnswer(message, numb, check) {
+    let n;
+do {
+    n = prompt(message, numb);
+} while(!check(n));
+return n;
+}
+//Конец функций хелперов
+
 
 console.log(title);
-console.log(getElement(startReset));
+console.log(start);
+console.log(reset);
 console.log(screenBtn);
-console.log(getElement2(controls));
-console.log(getElement2(mainControls));
+console.log(controls);
+console.log(mainControls);
 console.log(inputVal);
 console.log(spanVal);
-console.log(getElement(totalInput));
+console.log(totalInput1);
+console.log(totalInput2);
+console.log(totalInput3);
+console.log(totalInput4);
+console.log(totalInput5);
 console.log(display);
 
 
@@ -113,22 +128,7 @@ const appData = {
     
     }
 };
-//Функции хелперы
-function isNumber(x) {
-    return !isNaN(parseFloat(x)) && isFinite(x);
-}
 
-function isString(str) {
-    return isNaN(str) ? !!str.trim() : false;
-}
-function getUserAnswer(message, numb, check) {
-    let n;
-do {
-    n = prompt(message, numb);
-} while(!check(n));
-return n;
-}
-//Конец функций хелперов
 
 
 //appData.start();
