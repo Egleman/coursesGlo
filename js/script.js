@@ -6,11 +6,11 @@ const controls = document.querySelectorAll('.other-items.percent');
 const mainControls = document.querySelectorAll('.other-items.number');
 const inputVal = document.querySelector('.rollback > .main-controls__range > input');
 const spanVal = document.querySelector('.rollback > .main-controls__range > .range-value');
-let totalInput1 = document.getElementsByClassName('total-input')[0];
-let totalInput2 = document.getElementsByClassName('total-input')[1];
-let totalInput3 = document.getElementsByClassName('total-input')[2];
-let totalInput4 = document.getElementsByClassName('total-input')[3];
-let totalInput5 = document.getElementsByClassName('total-input')[4];
+let priceLayout = document.getElementsByClassName('total-input')[0];
+let numberOfScreens = document.getElementsByClassName('total-input')[1];
+let priceAddService = document.getElementsByClassName('total-input')[2];
+let fullPrice = document.getElementsByClassName('total-input')[3];
+let rollbackPrice = document.getElementsByClassName('total-input')[4];
 let display = document.querySelectorAll('.screen');
 
 //Функции хелперы
@@ -39,11 +39,11 @@ console.log(controls);
 console.log(mainControls);
 console.log(inputVal);
 console.log(spanVal);
-console.log(totalInput1);
-console.log(totalInput2);
-console.log(totalInput3);
-console.log(totalInput4);
-console.log(totalInput5);
+console.log(priceLayout);
+console.log(numberOfScreens);
+console.log(priceAddService);
+console.log(fullPrice);
+console.log(rollbackPrice);
 console.log(display);
 
 
