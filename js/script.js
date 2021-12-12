@@ -6,8 +6,6 @@ const resetBtn = document.getElementsByClassName('handler_btn')[1];
 const buttonPlus = document.querySelector('.screen-btn');
 const otherItemPercent = document.querySelectorAll('.other-items.percent');
 const otherItemNumber = document.querySelectorAll('.other-items.number');
-//const inputVal = document.querySelector('.rollback > .main-controls__range > input');
-//const spanVal = document.querySelector('.rollback > .main-controls__range > .range-value');
 
 let priceLayout = document.getElementsByClassName('total-input')[0];
 let numberOfScreens = document.getElementsByClassName('total-input')[1];
@@ -90,16 +88,6 @@ const appData = {
     addScreens: () => {
         screens = document.querySelectorAll('.screen');
         appData.checkValue();
-        /*
-        screens.forEach((screen, index)=> {
-            const select = screen.querySelector('select');
-            const input = screen.querySelector('input');
-            const selectName = select.options[select.selectedIndex].textContent;
-
-            appData.screens.push({id: index, name: selectName, price: +select.value * +input.value});
-            
-        });
-        */
         console.log(appData.screens);
     },
     addScreenBlock: () => {
