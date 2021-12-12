@@ -16,7 +16,7 @@ let rollbackPrice = document.getElementsByClassName('total-input')[4];
 let controlsRange = document.querySelector('.main-controls__range > input');
 let rangeValue = document.querySelector('.range-value');
 
-let screens = document.querySelectorAll('.screen');
+let screensDisp = document.querySelectorAll('.screen');
 
 
 
@@ -53,7 +53,7 @@ const appData = {
     ServicePricesPercent: 0,
     ServicePricesNumber: 0,
     servicePercentPrice: 0,
-    count: 0,
+
     init: () => {
         appData.addTitle();
         startBtn.addEventListener('click', ()=> {
@@ -65,14 +65,15 @@ const appData = {
 
         controlsRange.addEventListener('input', () => {
             rangeValue.textContent = controlsRange.value + '%';
+            rollbackPrice.value = +fullPrice.value - (+fullPrice.value * (parseInt(rangeValue.textContent) / 100));
         });
 
 
     },
     checkValue: () => {
-        screens = document.querySelectorAll('.screen');
+        screensDisp = document.querySelectorAll('.screen');
 
-        screens.forEach((screen, index) => {
+        screensDisp.forEach((screen, index) => {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
@@ -86,13 +87,15 @@ const appData = {
         document.title = title.textContent;
     },
     addScreens: () => {
-        screens = document.querySelectorAll('.screen');
+        //screensDisp = document.querySelectorAll('.screen');
         appData.checkValue();
         console.log(appData.screens);
     },
     addScreenBlock: () => {
-        const cloneScreen = screens[0].cloneNode(true);
-        screens[screens.length - 1].after(cloneScreen);
+        screensDisp = document.querySelectorAll('.screen');
+        const cloneScreen = screensDisp[0].cloneNode(true);
+        cloneScreen.querySelector('input').value = '';
+         screensDisp[screensDisp.length - 1].after(cloneScreen);
     },
     addServices: () => {
         otherItemPercent.forEach((item) => {
@@ -140,22 +143,28 @@ const appData = {
 
         appData.fullPrice =  +appData.screenPrice + appData.ServicePricesPercent + appData.ServicePricesNumber;
 
-        if (appData.rollback === 0 || appData.rollback === '') {
-            appData.servicePercentPrice =  appData.fullPrice;
-        } else {
-            appData.servicePercentPrice =  Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
-        }
+        
+        appData.servicePercentPrice =  Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
+
+        //rollbackPrice.value =  Math.ceil(fullPrice.value - (fullPrice.value * (appData.rollback/100)));
         
     },
     addRollback: () => {
-        appData.rollback = parseInt(rangeValue.textContent);
+        if (parseInt(rangeValue.textContent === 0) || parseInt(rangeValue.textContent === '0')) {
+            appData.rollback = parseInt(fullPrice.value);
+            rollbackPrice.value = parseInt(fullPrice.value);
+        } else {
+            appData.rollback = +fullPrice.value - (+fullPrice.value * (parseInt(rangeValue.textContent) / 100));
+            rollbackPrice.value = +fullPrice.value - (+fullPrice.value * (parseInt(rangeValue.textContent) / 100));
+        }
+        console.log(appData.rollback);
     },
     showResult: () => {
         priceLayout.value = appData.screenPrice;
         priceAddService.value = appData.ServicePricesPercent + appData.ServicePricesNumber;
         fullPrice.value = appData.fullPrice;
-        rollbackPrice.value = appData.servicePercentPrice;
         numberOfScreens.value = appData.count;
+        //rollbackPrice.value = appData.servicePercentPrice;
     },
     getServicePercentPrices: () => {
         appData.servicePercentPrice =  Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
@@ -163,9 +172,10 @@ const appData = {
     start: () => {
         appData.addScreens();
         appData.addServices();
-        appData.addRollback();
         appData.addPrices();
+        //appData.addRollback();
         appData.showResult();
+        appData.addRollback();
         //appData.logger();
     },
     logger: () => {
