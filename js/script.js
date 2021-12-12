@@ -65,7 +65,7 @@ const appData = {
 
         controlsRange.addEventListener('input', () => {
             rangeValue.textContent = controlsRange.value + '%';
-            rollbackPrice.value = +fullPrice.value - (+fullPrice.value * (parseInt(rangeValue.textContent) / 100));
+            rollbackPrice.value =  Math.ceil(+fullPrice.value - (+fullPrice.value * (parseInt(rangeValue.textContent) / 100)));
         });
 
 
