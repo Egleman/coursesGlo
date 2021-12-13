@@ -37,10 +37,6 @@ return n;
 }
 //Конец функций хелперов
 
-
-
-
-
 const appData = {
     title: '',
     screens: [],
@@ -54,11 +50,12 @@ const appData = {
     ServicePricesNumber: 0,
     servicePercentPrice: 0,
 
-    init: () => {
-        appData.addTitle();
-        startBtn.addEventListener('click', ()=> {
+    init: () => {    
+        startBtn.addEventListener('click', () => {
             appData.start();
         });
+        
+        appData.addTitle();
         buttonPlus.addEventListener('click', ()=> {
             appData.addScreenBlock();
         });
@@ -67,29 +64,27 @@ const appData = {
             rangeValue.textContent = controlsRange.value + '%';
             rollbackPrice.value =  Math.ceil(+fullPrice.value - (+fullPrice.value * (parseInt(rangeValue.textContent) / 100)));
         });
-
-
     },
-    checkValue: () => {
-        screensDisp = document.querySelectorAll('.screen');
 
+    addTitle: () => {
+        document.title = title.textContent;
+    },
+    
+    addScreens: () => {   
+        screensDisp = document.querySelectorAll('.screen');
         screensDisp.forEach((screen, index) => {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
 
-            if(input.value !== '' && select.value !== '') {
+            
+            if(input.value !== "" && select.value !== "") {
                 appData.screens.push({id: index, name: selectName, price: +select.value * +input.value, count: +input.value});
+            } else {
+                appData.screens.splice(0);
             }
         });
-    },
-    addTitle: () => {
-        document.title = title.textContent;
-    },
-    addScreens: () => {
-        //screensDisp = document.querySelectorAll('.screen');
-        appData.checkValue();
-        console.log(appData.screens);
+    
     },
     addScreenBlock: () => {
         screensDisp = document.querySelectorAll('.screen');
@@ -136,18 +131,13 @@ const appData = {
             appData.ServicePricesNumber += appData.servicesNumber[key];
         }
 
-        
         for (let key in appData.servicesPercent) {
             appData.ServicePricesPercent += (appData.screenPrice * (appData.servicesPercent[key] / 100));
         }
 
         appData.fullPrice =  +appData.screenPrice + appData.ServicePricesPercent + appData.ServicePricesNumber;
 
-        
-        appData.servicePercentPrice =  Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
-
-        //rollbackPrice.value =  Math.ceil(fullPrice.value - (fullPrice.value * (appData.rollback/100)));
-        
+        appData.servicePercentPrice =  Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100))); 
     },
     addRollback: () => {
         if (parseInt(rangeValue.textContent === 0) || parseInt(rangeValue.textContent === '0')) {
@@ -164,19 +154,21 @@ const appData = {
         priceAddService.value = appData.ServicePricesPercent + appData.ServicePricesNumber;
         fullPrice.value = appData.fullPrice;
         numberOfScreens.value = appData.count;
-        //rollbackPrice.value = appData.servicePercentPrice;
     },
     getServicePercentPrices: () => {
         appData.servicePercentPrice =  Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
     },
     start: () => {
-        appData.addScreens();
-        appData.addServices();
-        appData.addPrices();
-        //appData.addRollback();
-        appData.showResult();
-        appData.addRollback();
-        //appData.logger();
+            let screensDispInp = document.querySelector('.screen');
+            let inputVal = screensDispInp.querySelector('input');
+
+            if(inputVal.value !== "") {
+                appData.addScreens();
+                appData.addServices();
+                appData.addPrices();
+                appData.showResult();
+                appData.addRollback();
+            }
     },
     logger: () => {
         console.log(appData.title);
@@ -187,13 +179,6 @@ const appData = {
         for(let i in appData){
             console.log('appData[' + i + '] = ' + appData[i]);
         }
-        
-    
     }
 };
-
-
 appData.init();
-
-
-
