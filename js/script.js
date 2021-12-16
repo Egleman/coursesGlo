@@ -105,9 +105,8 @@ const appData = {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
-
             
-            if(input.value !== "" && select.value !== "") {
+            if(input.value !== "" && select.value !== "" && !isNaN(input.value)) {
                 this.screens.push({id: index, name: selectName, price: +select.value * +input.value, count: +input.value});
             } else {
                 this.screens.splice(0);
@@ -116,10 +115,12 @@ const appData = {
     
     },
     addScreenBlock: function() {
-        screensDisp = document.querySelectorAll('.screen');
-        const cloneScreen = screensDisp[0].cloneNode(true);
-        cloneScreen.querySelector('input').value = '';
-         screensDisp[screensDisp.length - 1].after(cloneScreen);
+        
+            screensDisp = document.querySelectorAll('.screen');
+            const cloneScreen = screensDisp[0].cloneNode(true);
+            cloneScreen.querySelector('input').value = '';
+            screensDisp[screensDisp.length - 1].after(cloneScreen);
+        
     },
     addServices: function() {
         otherItemPercent.forEach((item) => {
@@ -202,7 +203,7 @@ const appData = {
         const select = screen.querySelector('select');
         const input = screen.querySelector('input');
 
-        if (input.value.trim() !== '' && select.value !== '') {
+        if (input.value.trim() !== '' && select.value !== '' && !isNaN(input.value.trim())) {
             badOk.push('1');
         } else {
             badOk.push('0');
@@ -229,6 +230,14 @@ const appData = {
             select.disabled = true;
             input.disabled = true;
             });
+            buttonPlus.disabled = true;
+            otherItemPercent.forEach((item) => {
+                item.querySelector('input[type=checkbox]').disabled = true;
+            });
+            otherItemNumber.forEach((item) => {
+                item.querySelector('input[type=checkbox]').disabled = true;
+            });
+            cmsOpen.disabled = true;
         } else {
             //Если все условия не удовлетворяют, то чистим массив для ещё одной проверки
             badOk.splice(0);
@@ -258,6 +267,7 @@ const appData = {
         resetBtn.style.display = 'none';
         hiddenCms.style.display = 'none';
         cmsOpen.checked = false;
+        buttonPlus.disabled = false;
 
         cmsSelect.value = '';
         priceLayout.value = 0;
@@ -275,6 +285,7 @@ const appData = {
         this.servicePercentPrice = 0;
         this.screens.splice(0);
         otherItemPercent.forEach((item) => {
+            item.querySelector('input[type=checkbox]').disabled = false;
             item.querySelector('input[type=checkbox]').checked = false;
             const label = item.querySelector('label');
             this.servicesPercent[label.textContent] = 0;
@@ -282,10 +293,11 @@ const appData = {
 
         otherItemNumber.forEach((item) => {
             item.querySelector('input[type=checkbox]').checked = false;
+            item.querySelector('input[type=checkbox]').disabled = false;
             const label = item.querySelector('label');
              this.servicesNumber[label.textContent] = 0;
         });
-
+        cmsOpen.disabled = false;
     },
 };
 appData.init();
