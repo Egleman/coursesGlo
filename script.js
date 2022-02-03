@@ -10,6 +10,7 @@ let allServicePrices;
 let servicePercentPrice;
 
 const isNumber = (x) => {
+    if(!num || num[0] === " " || num[-1] === " ")  return false;
     return !isNaN(parseFloat(x)) && isFinite(x);
 };
 
