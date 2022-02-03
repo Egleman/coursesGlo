@@ -12,8 +12,9 @@ let servicePercentPrice;
 const isNumber = (x) => {
     return !isNaN(parseFloat(x)) && isFinite(x);
 };
+
 function isString(str) {
-    return str ? !!str.trim() : false;
+    return !!!parseInt(str) == false || str === null ? false : str.trim();
 }
 
 function getUserAnswer(message, numb, check) {
@@ -21,14 +22,14 @@ function getUserAnswer(message, numb, check) {
     do {
         n = prompt(message, numb);
     } while(!check(n));
-    return n;
+    return n.trim();
 }
 
 
 
 const asking = () => {
     title = getUserAnswer("Введите название проекта", "калькулятор", isString);
-    screens = getUserAnswer('Какие типы экранов нужно разработать?', "сложные", isString);
+    screens = +getUserAnswer('Какие типы экранов нужно разработать?', "сложные", isString);
     do {
         screenPrice = +getUserAnswer('Сколько будет стоить данная работа?', "15000", isNumber);
     } while (isNaN(screenPrice));
